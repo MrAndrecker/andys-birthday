@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Andy’s Birthday 🎬🍻🍰</title>
+
+  <style>
+    :root{
+      --bg1:#0b1220;
+      --bg2:#160b2e;
+      --card: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --accent:#ffb703;
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --r: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 15% 10%, rgba(255,183,3,.16), transparent 60%),
+        radial-gradient(900px 600px at 90% 20%, rgba(251,113,133,.16), transparent 65%),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+      min-height:100svh;
+      display:flex;
+      justify-content:center;
+      padding:18px;
+    }
+    .wrap{width:min(720px,100%); display:grid; gap:14px}
+    .card{
+      background:var(--card);
+      border:1px solid var(--stroke);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    header{
+      padding:16px 16px 12px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.12);
+    }
+    h1{
+      margin:0;
+      font-size:clamp(22px,4.6vw,32px);
+      letter-spacing:.2px;
+      line-height:1.15;
+    }
+    .meta{
+      margin:10px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-weight:600;
+    }
+    main{padding:14px 16px 16px; display:grid; gap:12px}
+    .box{
+      border:1px solid var(--stroke);
+      background:rgba(0,0,0,.12);
+      border-radius:14px;
+      padding:12px;
+    }
+    .box h2{
+      margin:0 0 8px;
+      font-size:15px;
+      letter-spacing:.2px;
+    }
+    p{margin:0; color:var(--muted); line-height:1.7}
+    .timeline{display:grid; gap:10px}
+    .item{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+    }
+    .time{
+      font-weight:900;
+      color:var(--accent);
+      min-width:72px;
+    }
+    .kpi{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-top:10px;
+    }
+    .kpi div{
+      text-align:center;
+      padding:10px 8px;
+      border-radius:14px;
+      border:1px solid var(--stroke);
+      background:rgba(0,0,0,.12);
+      font-weight:900;
+    }
+    .kpi span{display:block; font-size:18px; color:var(--accent)}
+    .kpi small{color:var(--muted); font-weight:700}
+    .status{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,183,3,.35);
+      background:rgba(255,183,3,.10);
+      color:rgba(255,255,255,.86);
+      font-weight:800;
+    }
+    .small{font-size:12px; color:rgba(255,255,255,.55); margin-top:8px}
+
+    .messageBox{
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.20);
+      padding:12px;
+      color:var(--text);
+      line-height:1.65;
+      white-space:pre-wrap;
+      user-select:text;
+    }
+
+    footer{
+      padding:12px 16px 14px;
+      border-top:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.12);
+      color:rgba(255,255,255,.68);
+      font-weight:700;
+      line-height:1.6;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <h1>Andy’s Birthday 🎬🍻🍰</h1>
+        <div class="meta">
+          📅 <b id="dateLabel">28 FEBBRAIO</b> · 📍 <b id="cityLabel">Catania</b>
+        </div>
+      </header>
+
+      <main>
+        <section class="box">
+          <h2>📌 Programma</h2>
+          <div class="timeline">
+            <div class="item">
+              <div class="time">20:00</div>
+              <div>
+                <b>Cinema</b> - The Space 🎬🍿
+                <div class="small">Arrivo consigliato: 19:45-19:55</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="time">23:30+</div>
+              <div>
+                <b>Post-serata</b> - Magna Sicily 🍻🍰
+                <div class="small">Dalle 23:30 in poi (quando usciamo dal cinema)</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="box">
+          <h2>⏳ Countdown al cinema (20:00)</h2>
+          <p>Conto alla rovescia fino alle <b>20:00</b>.</p>
+          <div class="kpi" id="countdown">
+            <div><span id="d">--</span><small>giorni</small></div>
+            <div><span id="h">--</span><small>ore</small></div>
+            <div><span id="m">--</span><small>min</small></div>
+            <div><span id="s">--</span><small>sec</small></div>
+          </div>
+          <div class="status" id="status">Countdown in preparazione…</div>
+        </section>
+
+        <section class="box">
+          <h2>💬 Messaggio condiviso</h2>
+          <div class="messageBox" id="messageText"></div>
+        </section>
+      </main>
+
+      <footer>
+        A dopo 🎬🍻
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const DATE_LABEL = "28 FEBBRAIO";
+    const CITY_LABEL = "Catania";
+
+    // Countdown corretto: 28/02/2026 ore 20:00 (Italia, +01:00)
+    const CINEMA_DATE_ISO = "2026-02-28T20:00:00+01:00";
+
+    const MESSAGE =
+`Nel film Jolly Good Christmas il “best gift” non è il regalo più costoso, ma quello che dimostra ascolto reale e comprensione. Per arrivarci, l’idea è immaginarlo come un piccolo diagramma di Venn a tre cerchi, ovvero ciò che una persona ama davvero (passioni e gusti autentici, non quelli “dovuti”), ciò di cui ha bisogno adesso (qualcosa di utile o significativo nel suo momento) e ciò che è personale e pensato apposta (un dettaglio che parla di voi, una frase, un ricordo, una preferenza precisa). Il regalo migliore nasce proprio al centro, quando un’unica idea riesce a stare nell’intersezione di tutti e tre.`;
+
+    document.getElementById("dateLabel").textContent = DATE_LABEL;
+    document.getElementById("cityLabel").textContent = CITY_LABEL;
+    document.getElementById("messageText").textContent = MESSAGE;
+
+    const dEl = document.getElementById("d");
+    const hEl = document.getElementById("h");
+    const mEl = document.getElementById("m");
+    const sEl = document.getElementById("s");
+    const statusEl = document.getElementById("status");
+
+    const pad = (n)=> String(n).padStart(2,"0");
+    const target = new Date(CINEMA_DATE_ISO).getTime();
+
+    if (Number.isNaN(target)) {
+      statusEl.textContent = "⚠️ Data non valida.";
+    } else {
+      const tick = ()=>{
+        const now = Date.now();
+        let diff = target - now;
+
+        if(diff <= 0){
+          dEl.textContent = "00";
+          hEl.textContent = "00";
+          mEl.textContent = "00";
+          sEl.textContent = "00";
+          statusEl.textContent = "🎬 È ora: si va al cinema!";
+          return;
+        }
+
+        const d = Math.floor(diff / (1000*60*60*24));
+        diff %= (1000*60*60*24);
+        const h = Math.floor(diff / (1000*60*60));
+        diff %= (1000*60*60);
+        const m = Math.floor(diff / (1000*60));
+        const s = Math.floor((diff % (1000*60)) / 1000);
+
+        dEl.textContent = pad(d);
+        hEl.textContent = pad(h);
+        mEl.textContent = pad(m);
+        sEl.textContent = pad(s);
+        statusEl.textContent = "Countdown attivo: ci vediamo alle 20:00 🎬";
+      };
+
+      tick();
+      setInterval(tick, 1000);
+    }
+  </script>
+</body>
+</html>
