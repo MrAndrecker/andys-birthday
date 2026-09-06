@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#02050c">
+  <meta name="color-scheme" content="dark">
+  <meta name="version" content="1.0">
+  <meta name="description" content="Andy — personal links, social profiles, music and video in one place.">
+
+  <meta property="og:title" content="Andy — Links">
+  <meta property="og:description" content="Personal links, social profiles, music and video in one place.">
+  <meta property="og:type" content="website">
+
+  <title>Andy — Links</title>
+
+  <style>
+    :root {
+      --night-0: #01030a;
+      --night-1: #020711;
+      --night-2: #061322;
+      --night-3: #0a2035;
+      --text: #edf5fb;
+      --muted: #8fa5b7;
+      --muted-2: #6f8799;
+      --accent: #b2ccdc;
+      --line: rgba(159, 193, 216, 0.17);
+      --line-strong: rgba(172, 206, 227, 0.34);
+      --card: rgba(5, 17, 30, 0.70);
+      --card-hover: rgba(9, 29, 49, 0.88);
+      --shadow: rgba(0, 0, 0, 0.38);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--night-0);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      min-height: 100svh;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 50% 15%, rgba(28, 65, 96, 0.27), transparent 30%),
+        radial-gradient(circle at 84% 21%, rgba(37, 77, 109, 0.12), transparent 24%),
+        linear-gradient(180deg, var(--night-0) 0%, #030914 38%, var(--night-2) 70%, var(--night-1) 100%);
+      overflow-x: hidden;
+    }
+
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .scene,
+    .scene::before,
+    .scene::after {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .scene {
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .scene::before {
+      content: "";
+      background-image:
+        radial-gradient(circle at 8% 13%, rgba(255,255,255,.68) 0 1px, transparent 1.45px),
+        radial-gradient(circle at 18% 31%, rgba(196,220,236,.34) 0 1px, transparent 1.45px),
+        radial-gradient(circle at 27% 8%, rgba(255,255,255,.40) 0 1px, transparent 1.45px),
+        radial-gradient(circle at 39% 23%, rgba(255,255,255,.27) 0 1px, transparent 1.45px),
+        radial-gradient(circle at 49% 10%, rgba(211,230,242,.52) 0 1px, transparent 1.45px),
+        radial-gradient(circle at 61% 34%, rgba(255,255,255,.31) 0 1px, transparent 1.45px),
+        radial-gradient(circle at 71% 16%, rgba(255,255,255,.55) 0 1px, transparent 1.45px),
+        radial-gradient(circle at 82% 37%, rgba(190,216,234,.32) 0 1px, transparent 1.45px),
+        radial-gradient(circle at 92% 11%, rgba(255,255,255,.42) 0 1px, transparent 1.45px),
+        radial-gradient(circle at 95% 48%, rgba(255,255,255,.23) 0 1px, transparent 1.45px),
+        radial-gradient(circle at 13% 51%, rgba(255,255,255,.20) 0 1px, transparent 1.45px),
+        radial-gradient(circle at 54% 45%, rgba(211,230,242,.22) 0 1px, transparent 1.45px);
+      opacity: .80;
+      animation: stars 9s ease-in-out infinite alternate;
+    }
+
+    .scene::after {
+      content: "";
+      inset: auto -15% 0 -15%;
+      height: 22vh;
+      min-height: 130px;
+      background:
+        linear-gradient(180deg, rgba(2, 9, 16, 0) 0%, rgba(4, 22, 36, .54) 24%, rgba(1, 8, 16, .96) 100%);
+      border-top: 1px solid rgba(146, 187, 214, .13);
+      box-shadow:
+        inset 0 12px 28px rgba(100, 154, 190, .025),
+        0 -1px 0 rgba(173, 205, 225, .04);
+      transform: rotate(-0.25deg);
+    }
+
+    .moon {
+      position: fixed;
+      z-index: 0;
+      top: clamp(30px, 6.5vh, 72px);
+      right: clamp(24px, 8vw, 130px);
+      width: clamp(58px, 7vw, 88px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 31% 30%, rgba(255,255,255,.96) 0 8%, transparent 9%),
+        radial-gradient(circle at 64% 63%, rgba(117,139,153,.13) 0 13%, transparent 14%),
+        radial-gradient(circle at 38% 70%, rgba(94,120,137,.10) 0 8%, transparent 9%),
+        radial-gradient(circle at 36% 31%, #f1f5f7 0%, #d5e0e6 49%, #91a9b9 100%);
+      box-shadow:
+        0 0 18px rgba(202, 225, 239, .22),
+        0 0 62px rgba(89, 144, 181, .15),
+        0 0 110px rgba(57, 108, 145, .07);
+      opacity: .88;
+    }
+
+    .moon-reflection {
+      position: fixed;
+      z-index: 0;
+      right: clamp(10px, 7.1vw, 118px);
+      bottom: 22px;
+      width: clamp(80px, 9vw, 125px);
+      height: 92px;
+      opacity: .16;
+      filter: blur(4px);
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        180deg,
+        rgba(181, 211, 230, .58) 0 2px,
+        transparent 2px 8px
+      );
+      clip-path: polygon(45% 0, 55% 0, 76% 100%, 23% 100%);
+      animation: reflection 6s ease-in-out infinite alternate;
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      min-height: 100svh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding:
+        max(74px, env(safe-area-inset-top))
+        18px
+        max(126px, calc(env(safe-area-inset-bottom) + 72px));
+    }
+
+    .panel {
+      width: min(100%, 540px);
+      text-align: center;
+    }
+
+    .crescent {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 12px;
+      color: #a6becf;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 29px;
+      opacity: .82;
+      text-shadow: 0 0 24px rgba(169, 203, 225, .14);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 7vw, 48px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: .09em;
+      text-shadow: 0 2px 20px rgba(0,0,0,.22);
+    }
+
+    .subtitle {
+      max-width: 420px;
+      margin: 13px auto 31px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+      letter-spacing: .075em;
+    }
+
+    .links {
+      display: grid;
+      gap: 12px;
+    }
+
+    .link-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 28px;
+      align-items: center;
+      min-height: 68px;
+      padding: 10px 15px 10px 12px;
+      color: var(--text);
+      text-decoration: none;
+      text-align: left;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow:
+        0 16px 44px var(--shadow),
+        inset 0 1px 0 rgba(255,255,255,.025);
+      backdrop-filter: blur(16px) saturate(112%);
+      -webkit-backdrop-filter: blur(16px) saturate(112%);
+      transition:
+        transform .20s ease,
+        border-color .20s ease,
+        background .20s ease,
+        box-shadow .20s ease;
+    }
+
+    .link-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(110deg, rgba(170,204,226,.035), transparent 32%, transparent 70%, rgba(92,143,178,.025));
+      pointer-events: none;
+    }
+
+    .link-card:hover,
+    .link-card:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--line-strong);
+      background: var(--card-hover);
+      box-shadow:
+        0 19px 48px rgba(0,0,0,.45),
+        0 0 0 1px rgba(138,182,211,.025) inset;
+      outline: none;
+    }
+
+    .brand {
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      background: rgba(181, 211, 230, .035);
+      border: 1px solid rgba(174, 205, 225, .12);
+      border-radius: 50%;
+    }
+
+    .brand svg {
+      width: 19px;
+      height: 19px;
+      display: block;
+      fill: currentColor;
+    }
+
+    .copy {
+      min-width: 0;
+      padding: 0 10px;
+    }
+
+    .label {
+      display: block;
+      overflow: hidden;
+      color: #eef6fb;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: .035em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .detail {
+      display: block;
+      overflow: hidden;
+      margin-top: 4px;
+      color: var(--muted-2);
+      font-size: 11px;
+      line-height: 1.3;
+      letter-spacing: .045em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .arrow {
+      justify-self: end;
+      color: #7290a5;
+      font-size: 17px;
+      line-height: 1;
+      transition: transform .20s ease, color .20s ease;
+    }
+
+    .link-card:hover .arrow,
+    .link-card:focus-visible .arrow {
+      transform: translate(2px, -2px);
+      color: #c0d6e4;
+    }
+
+    .footer {
+      margin-top: 28px;
+      color: rgba(146, 169, 186, .52);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 10px;
+      line-height: 1.5;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    .footer::before {
+      content: "";
+      display: block;
+      width: 44px;
+      height: 1px;
+      margin: 0 auto 13px;
+      background: linear-gradient(90deg, transparent, rgba(153,190,214,.40), transparent);
+    }
+
+    @keyframes stars {
+      from { opacity: .64; }
+      to { opacity: .88; }
+    }
+
+    @keyframes reflection {
+      from { transform: translateX(-2px) scaleX(.88); }
+      to { transform: translateX(3px) scaleX(1.05); }
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        align-items: flex-start;
+        padding-top: max(90px, calc(env(safe-area-inset-top) + 66px));
+        padding-bottom: max(112px, calc(env(safe-area-inset-bottom) + 74px));
+      }
+
+      .moon {
+        top: max(22px, calc(env(safe-area-inset-top) + 14px));
+        right: 22px;
+        width: 58px;
+        opacity: .72;
+      }
+
+      .moon-reflection {
+        right: 14px;
+        opacity: .11;
+      }
+
+      .crescent {
+        margin-bottom: 8px;
+      }
+
+      h1 {
+        font-size: 37px;
+      }
+
+      .subtitle {
+        margin-bottom: 25px;
+        padding: 0 16px;
+        font-size: 12px;
+      }
+
+      .link-card {
+        grid-template-columns: 46px minmax(0, 1fr) 25px;
+        min-height: 65px;
+        border-radius: 16px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .page {
+        padding-left: 13px;
+        padding-right: 13px;
+      }
+
+      .link-card {
+        padding-right: 12px;
+      }
+
+      .copy {
+        padding-left: 8px;
+        padding-right: 6px;
+      }
+    }
+
+    @media (hover: none) {
+      .link-card:active {
+        transform: scale(.992);
+        border-color: rgba(172, 206, 227, .30);
+        background: rgba(10, 31, 52, .88);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="scene" aria-hidden="true"></div>
+  <div class="moon" aria-hidden="true"></div>
+  <div class="moon-reflection" aria-hidden="true"></div>
+
+  <main class="page">
+    <section class="panel" aria-labelledby="page-title">
+      <div class="crescent" aria-hidden="true">☾</div>
+      <h1 id="page-title">Andy</h1>
+      <p class="subtitle">Somewhere between the sea and the night.</p>
+
+      <nav class="links" aria-label="Andy's links">
+        <a
+          class="link-card"
+          href="https://www.tiktok.com/@andrewberitelli?_r=1&amp;_t=ZN-94nI5t3aG9u"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open Andy's TikTok"
+        >
+          <span class="brand" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+            </svg>
+          </span>
+          <span class="copy">
+            <span class="label">TikTok</span>
+            <span class="detail">@andrewberitelli</span>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a
+          class="link-card"
+          href="https://open.spotify.com/user/11179064914?si=IKyUZ4XCQPy3VjUr8GDLjg"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open Andy's Spotify profile"
+        >
+          <span class="brand" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+            </svg>
+          </span>
+          <span class="copy">
+            <span class="label">Spotify</span>
+            <span class="detail">Music profile</span>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a
+          class="link-card"
+          href="https://youtu.be/i_T_gsACpLs?is=c2DDx7AIUAFboeH0"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open YouTube video"
+        >
+          <span class="brand" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </span>
+          <span class="copy">
+            <span class="label">YouTube</span>
+            <span class="detail">Video</span>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a
+          class="link-card"
+          href="https://youtube.com/playlist?list=PLAPOiaD7boWXCpyuB5y9VRURJzDKsGVyK&amp;si=9xPEImSrpSXK7F_u"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open YouTube playlist"
+        >
+          <span class="brand" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </span>
+          <span class="copy">
+            <span class="label">YouTube Playlist</span>
+            <span class="detail">Personal playlist</span>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a
+          class="link-card"
+          href="https://www.threads.com/@andrewberitelli?igshid=NTc4MTIwNjQ2YQ=="
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open Andy's Threads"
+        >
+          <span class="brand" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M18.263 11.097c-.03-3.486-1.92-5.586-5.111-5.586-2.13 0-3.922.963-4.863 2.499l2.062 1.438c.535-.843 1.272-1.543 2.628-1.543 1.528 0 2.318.85 2.544 2.431a15 15 0 0 0-2.236-.173c-4.125 0-6.068 1.867-6.068 4.336s1.943 3.99 4.804 3.99c3.139 0 5.013-2.115 5.781-4.735.798.361 1.348 1.204 1.348 2.47 0 3.387-3.907 5.232-7.22 5.232-4.885 0-8.077-3.207-8.077-8.424 0-6.392 4.223-10.487 9.9-10.487 3.808 0 5.69 1.671 6.97 3.914l2.108-1.475C21.44 2.078 18.331 0 13.663 0 6.227 0 1.168 5.277 1.168 12.934c0 7 4.953 11.066 10.856 11.066 4.878 0 9.809-2.846 9.809-7.716 0-2.545-1.46-4.231-3.569-5.187m-6.33 4.855c-1.077 0-2.026-.512-2.026-1.453 0-1.483 1.822-1.934 3.606-1.934.678 0 1.34.045 1.927.173-.422 1.927-1.671 3.215-3.508 3.214Z"/>
+            </svg>
+          </span>
+          <span class="copy">
+            <span class="label">Threads</span>
+            <span class="detail">@andrewberitelli</span>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </nav>
+
+      <footer class="footer">Under the same sky</footer>
+    </section>
+  </main>
+</body>
+</html>
